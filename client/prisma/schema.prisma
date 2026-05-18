@@ -1,0 +1,27 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model User {
+  id       String @id @default(cuid())
+  email    String @unique
+  role     String
+  goals    Goal[]
+}
+
+model Goal {
+  id        String @id @default(cuid())
+  title     String
+  target    String
+  weightage Int
+  uom       String
+
+  status    String @default("Pending") // NEW
+  progress  Int    @default(0)
+
+  userId    String
+}                               
